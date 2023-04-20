@@ -21,16 +21,18 @@ jobs:
       
   test:
     - name: SAST-action
-        runs-on: ubuntu-latest
+      uses: AppThreat/sast-scan-action@1.0.2
+        with:
+          Default
 
     steps:
       - name: Checkout do repositório
-        uses: actions/checkout@v2
+        uses: uses: actions/checkout@v2
 
       - name: Pull da Imagem Docker
       - uses: IvanKuchin/SAST@lates
 
-      - name: Scan de Vulnerabilidades
+      - name:  sast-scan
         uses: docker/scan-action@v1
         
 

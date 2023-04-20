@@ -22,8 +22,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Pull da Imagem Docker
-        uses: IvanKuchin/SAST@lates
+      - name: Run SAST Analysis via Semgrep and Reviewdog (+extras)
+            with:
+            github_token:
 
       - name: Envio de Alertas via Telegram
         if: always()

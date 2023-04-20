@@ -44,4 +44,4 @@ jobs:
           password: ${{secrets.DOCKERHUB_PWD}}
 
       - name: Rodar a Aplicação
-        run: docker run -p 8000:81 imagem-nova:latest
+        run: docker run -it -d -p 8000:80 imagem-nova:latest

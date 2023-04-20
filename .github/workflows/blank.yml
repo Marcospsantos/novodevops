@@ -21,8 +21,8 @@ jobs:
 
       - name: Build da Imagem Docker
         run: |
-          docker build -t minha-imagem:${{ github.sha }} .
-          docker tag minha-imagem:${{ github.sha }} minha-imagem:latest
+          docker build -t 
+          docker tag ubuntu:latest
 
       - name: Push da Imagem Docker
         run: docker push minha-imagem

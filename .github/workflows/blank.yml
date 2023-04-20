@@ -20,21 +20,20 @@ jobs:
           password : ${{secrets.DOCKERHUB_PWD}}
       
   test:
-    needs: build
-    runs-on: ubuntu-latest
+    - name: SAST-action
+        runs-on: ubuntu-latest
 
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v2
 
       - name: Pull da Imagem Docker
-        run: docker pull minha-imagem:latest
+      - uses: IvanKuchin/SAST@lates
 
       - name: Scan de Vulnerabilidades
         uses: docker/scan-action@v1
         with:
-          image-ref: minha-imagem:latest
-          scan-result-output: results.json
+          GITHUB_TOKEN
 
       - name: Envio de Alertas via Telegram
         if: ${{ always() }}

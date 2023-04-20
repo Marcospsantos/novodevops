@@ -18,13 +18,18 @@ jobs:
           username: ${{secrets.DOCKERHUB_USER}}
           password: ${{secrets.DOCKERHUB_PWD}}
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
+  jobs:
+    test:
+     runs-on: ubuntu-latest
+       steps:
       - name: Checkout do repositório
         uses: actions/checkout@v2
-      - name: Run Testes
-        run: echo "Teste executado com sucesso!"
+      
+      - name: Instalar ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+      
+      - name: Executar análise SAST
+        run: shellcheck script.sh
 
       - name: Envio de Alertas via Telegram
         if: ${{ always() }}

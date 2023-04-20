@@ -19,20 +19,15 @@ jobs:
           username : ${{secrets.DOCKERHUB_USER}}
           password : ${{secrets.DOCKERHUB_PWD}}
       
-  test:
-    - name: SAST-action
-      uses: AppThreat/sast-scan-action@1.0.2
+test:
+    - name: testes segurança
+      runs-on: ubuntu-latest
        
-    steps:
-      - name: Checkout do repositório
-        uses: uses: actions/checkout@v2
-
+      steps:
+ 
       - name: Pull da Imagem Docker
       - uses: IvanKuchin/SAST@lates
-
-      - name:  sast-scan
-        uses: docker/scan-action@v1
-        
+           
 
       - name: Envio de Alertas via Telegram
         if: ${{ always() }}

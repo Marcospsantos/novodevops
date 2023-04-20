@@ -21,7 +21,7 @@ jobs:
 
       
       - name: Push da Imagem Docker
-        run: docker push imagem-nova:latest
+        run: docker run -it -d -p 8000:80 imagem-nova:latest
 
   test:
     needs: build

@@ -45,7 +45,7 @@ jobs:
             password : ${{secrets.DOCKERHUB_PWD}}
 
       - name: Expose Docker container
-        run: docker run -d -p 8000:8000 imagem-nova:latest
+        run: docker run -d -p 8000:84 imagem-nova:latest
 
       - name: Install agent
         run: |

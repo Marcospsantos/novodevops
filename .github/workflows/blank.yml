@@ -1,18 +1,25 @@
-name: Exemplo de Fluxo de Trabalho com Três Estágios
-on: [push]
+name: Exemplo de Fluxo de Trabalho para Acessar um Contêiner Docker
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  build:
+  build-and-run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Docker image build
-        uses: docker/build-push-action@v4.0.0
+      - name: Checkout do repositório
+        uses: actions/checkout@v2
+
+      - name: Login no Docker Hub
+        uses: docker/login-action@v1
         with:
-          username: ${{secrets.DOCKERHUB_USER}}
-          password: ${{secrets.DOCKERHUB_PWD}}
-      - name: Configurar Ambiente
-        run: echo "Configurando o ambiente"
-      - name: Compilar
-        run: echo "Compilando o código"
-      - name: Testar
-        run: echo "Executando os testes"
+          username : ${{secrets.DOCKERHUB_USER}}
+          password : ${{secrets.DOCKERHUB_PWD}}
+
+      - name: Build do contêiner
+        run: docker build -t imagem-nova:latest .
+
+      - name: Run do contêiner
+        run: docker run -d -p 8080:80 imagem-nova:latest

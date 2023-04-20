@@ -28,20 +28,19 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           config: python.lang.security.yaml
 
-      
-  deploy:
-    name: Deploy da Aplicação
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout do repositório
-        uses: actions/checkout@v2
+deploy:
+  name: Deploy da Aplicação
+  needs: test
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout do repositório
+      uses: actions/checkout@v2
 
-      - name: Login no Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{secrets.DOCKERHUB_USER}}
-          password: ${{secrets.DOCKERHUB_PWD}}
+    - name: Login no Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{secrets.DOCKERHUB_USER}}
+        password: ${{secrets.DOCKERHUB_PWD}}
 
-      - name: Rodar a Aplicação
-        run: docker run -it -d -p 8000:80 imagem-nova:latest
+    - name: Rodar a Aplicação
+      run: docker run -it -d -p 8000:80 imagem-nova:latest

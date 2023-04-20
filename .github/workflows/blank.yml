@@ -32,8 +32,7 @@ jobs:
 
       - name: Scan de Vulnerabilidades
         uses: docker/scan-action@v1
-        with:
-          GITHUB_TOKEN
+        
 
       - name: Envio de Alertas via Telegram
         if: ${{ always() }}

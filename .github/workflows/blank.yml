@@ -43,8 +43,5 @@ jobs:
           username: ${{secrets.DOCKERHUB_USER}}
           password: ${{secrets.DOCKERHUB_PWD}}
 
-      - name: Pull da Imagem Docker
-        run: docker pull imagem-nova:latest
-
       - name: Rodar a Aplicação
         run: docker run -p 8000:81 imagem-nova:latest

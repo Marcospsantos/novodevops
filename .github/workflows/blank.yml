@@ -39,8 +39,7 @@ jobs:
     - name: Login no Docker Hub
       uses: docker/login-action@v1
       with:
-        username: ${{secrets.DOCKERHUB_USER}}
-        password: ${{secrets.DOCKERHUB_PWD}}
+        docker push ${{secrets.DOCKERHUB_USER}}/nova-imagem
 
     - name: Rodar a Aplicação
       run: docker run -it -d imagem-nova:latest

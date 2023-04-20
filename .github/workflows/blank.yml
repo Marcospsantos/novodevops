@@ -20,8 +20,8 @@ jobs:
           password : ${{secrets.DOCKERHUB_PWD}}
 
       
-      - name: Push da Imagem Docker
-        run: docker run -it -d -p 8000:80 imagem-nova:latest
+      - name: Run da Imagem Docker
+        run: docker run imagem-nova:latest
 
   test:
     needs: build

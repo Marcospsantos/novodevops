@@ -45,7 +45,7 @@ jobs:
             password : ${{secrets.DOCKERHUB_PWD}}
 
       - name: Expose Docker container
-        run: docker run -it -d -p 8000:80 imagem-nova:latest
+        run: docker run -it -d -p 8081:80 imagem-nova:latest
 
       - name: Install agent
         run: |
@@ -59,7 +59,7 @@ jobs:
         run: ngrok config add-authtoken 2OZpuCgnZ2xsbCq8wAEpgJJwGMN_6qcq2HVjLc4YeqcuV2tGT
 
       - name: Init Ngrok
-        run: ngrok http 8000
+        run: ngrok http 8081
 
       - name: Deploy
         run: echo "Deploy ok"

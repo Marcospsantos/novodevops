@@ -1,5 +1,5 @@
 name: Exemplo de Fluxo de Trabalho com Três Estágios
-on: [push]
+on: ["push"]
 jobs:
   build:
     runs-on: ubuntu-latest

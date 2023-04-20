@@ -18,12 +18,7 @@ jobs:
         with:
           username : ${{secrets.DOCKERHUB_USER}}
           password : ${{secrets.DOCKERHUB_PWD}}
-
       
-      - name: Run da Imagem Docker
-        with:
-          run: docker run imagem-nova:latest
-
   test:
     needs: build
     runs-on: ubuntu-latest

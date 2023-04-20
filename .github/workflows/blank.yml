@@ -1,26 +1,13 @@
-Name: CI-CD
-
-in :
-  Push :
-    branches : ["main"]
-    
-    works :
-      CI:
-        run-on : ubuntu-latest
-      
-          steps:
-            - uses : actions/checkout@v3.5.2
-            - name : Authentication on Docker Hub
-            
-            - name : Docker image build
-              uses : docker/build-push-action@v4.0.0
-              with :
-              username : ${{secrets.DOCKERHUB_USER}}
-              password : ${{secrets.DOCKERHUB_PWD}}
-              
-              
-                context : ./src
-                file: ./Dockerfile
-                push : true |
-                tags : |
-                santk/image:ubuntu:latest
+name: Exemplo de Fluxo de Trabalho com Três Estágios
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Configurar Ambiente
+      run: echo "Configurando o ambiente"
+    - name: Compilar
+      run: echo "Compilando o código"
+    - name: Testar
+      run: echo "Executando os testes"

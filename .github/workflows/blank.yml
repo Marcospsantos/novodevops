@@ -29,18 +29,35 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           config: python.lang.security.yaml
 
-  deploy:
-    name: Deploy da Aplicação
-    needs: test
+  deploy-job:
     runs-on: ubuntu-latest
+    needs: test-job
     steps:
-    - name: Checkout do repositório
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Login no Docker Hub
-      uses: docker/login-action@v1
-      with:
-        docker push ${{secrets.DOCKERHUB_USER}}/nova-imagem
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-    - name: Rodar a Aplicação
-      run: docker run -it -d imagem-nova:latest
+      - name: Expose Docker container
+        run: docker run -d -p 8000:8000 imagem-nova:latest
+
+      - name: Install agent
+        run: |
+          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | \
+            sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && \
+            echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | \
+            sudo tee /etc/apt/sources.list.d/ngrok.list && \
+            sudo apt update && sudo apt install ngrok
+
+      - name: Connect agente for token
+        run: ngrok config add-authtoken 2OZpuCgnZ2xsbCq8wAEpgJJwGMN_6qcq2HVjLc4YeqcuV2tGT
+
+      - name: Init Ngrok
+        run: ngrok http 8000
+
+      - name: Deploy
+        run: echo "Deploy ok"

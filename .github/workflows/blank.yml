@@ -30,15 +30,21 @@ jobs:
 
       
   deploy:
+    name: Deploy da Aplicação
     needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v2
 
-      
-      - name: Deploy da Aplicação
-        run: |
-          npm install
-          npm run build
-          npm start
+      - name: Login no Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{secrets.DOCKERHUB_USER}}
+          password: ${{secrets.DOCKERHUB_PWD}}
+
+      - name: Pull da Imagem Docker
+        run: docker pull imagem-nova:latest
+
+      - name: Rodar a Aplicação
+        run: docker run -p 8000:81 imagem-nova:latest

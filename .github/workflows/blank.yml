@@ -39,7 +39,7 @@ jobs:
     - name: Login no Docker Hub
       uses: docker/login-action@v1
       with:
-        docker push ${{secrets.DOCKERHUB_USER}}/nova-imagem
+        docker push ${{secrets.DOCKERHUB_USER}}/nova-imagem:latest
 
     - name: Rodar a Aplicação
       run: docker run -it -d imagem-nova:latest

@@ -51,4 +51,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/imagem-nova:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/imagem-nova:latest 

@@ -1,26 +1,23 @@
-nome : CI-CD
+deploy:
+  name: Deploy da Aplicação
+  needs: test
+  runs-on: ubuntu-latest
+  steps:
+  - name: Checkout do repositório
+    uses: actions/checkout@v2
 
-em :
-  empurre :
-    ramos : ["principal"]
-    
-    trabalhos :
-      CI :
-        run-on : ubuntu-latest
+  - name: Login no Docker Hub
+    uses: docker/login-action@v1
+    with:
+      username: ${{secrets.DOCKERHUB_USER}}
+      password: ${{secrets.DOCKERHUB_PWD}}
+
+  - name: Build e Push da imagem Docker
+    uses: docker/build-push-action@v2
+    with:
+      context: .
+      push: true
+      tags: imagem-nova:latest
       
-          passos :
-            - usa : ações/checkout@v3.5.2
-            - nome : autenticação no Docker Hub
-            
-            - nome : Construção da imagem Docker
-              usa : docker/build-push-action@v4.0.0
-              com :
-              nome de usuário : ${{secrets.DOCKERHUB_USER}}
-              senha : ${{secrets.DOCKERHUB_PWD}}
-              
-              
-                contexto : ./src
-                arquivo : ./Dockerfile
-                empurre : verdadeiro |
-                tags : |
-                santk/image:ubuntu:latest
+  - name: Rodar a Aplicação
+    run: docker run -it -d -p 8000:80 imagem-nova:latest

@@ -44,7 +44,8 @@ jobs:
             username : ${{secrets.DOCKERHUB_USER}}
             password : ${{secrets.DOCKERHUB_PWD}}
 
-      - name: Expose Docker container
+      - name: Expose Docker container:
+            username : ${{secrets.DOCKERHUB_USER}}
         run: docker run -it -d -p 8081:80 imagem-nova:latest
 
       - name: Install agent

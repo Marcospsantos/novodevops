@@ -22,9 +22,7 @@ jobs:
   test:
     - name: SAST-action
       uses: AppThreat/sast-scan-action@1.0.2
-        with:
-          Default
-
+       
     steps:
       - name: Checkout do repositório
         uses: uses: actions/checkout@v2

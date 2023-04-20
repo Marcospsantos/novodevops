@@ -1,0 +1,26 @@
+nome : CI-CD
+
+em :
+  empurre :
+    ramos : ["principal"]
+    
+    trabalhos :
+      CI :
+        run-on : ubuntu-latest
+      
+          passos :
+            - usa : ações/checkout@v3.5.2
+            - nome : autenticação no Docker Hub
+            
+            - nome : Construção da imagem Docker
+              usa : docker/build-push-action@v4.0.0
+              com :
+              nome de usuário : ${{secrets.DOCKERHUB_USER}}
+              senha : ${{secrets.DOCKERHUB_PWD}}
+              
+              
+                contexto : ./src
+                arquivo : ./Dockerfile
+                empurre : verdadeiro |
+                tags : |
+                santk/image:ubuntu:latest

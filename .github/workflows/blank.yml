@@ -21,7 +21,9 @@ jobs:
 
       
       - name: Run da Imagem Docker
-        run: docker run imagem-nova:latest
+        with:
+          username : ${{secrets.DOCKERHUB_USER}}
+          run: docker run imagem-nova:latest
 
   test:
     needs: build

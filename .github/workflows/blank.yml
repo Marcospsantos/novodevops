@@ -44,7 +44,7 @@ jobs:
       - name: Expose Docker container
       
         run: docker pull nginx imagem-nova:latest
-        #run: 127.0.0.1:8000:80 docker push/imagem-nova:latest
+        #run: 127.0.0.1:8000:80 docker push nginx/imagem-nova:latest
 
       - name: Install agent
         run: |

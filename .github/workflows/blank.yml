@@ -57,4 +57,3 @@ deploy-job:
     - name: Deploy
       run: echo "Deploy ok"
 
-      run: echo "Deploy ok"

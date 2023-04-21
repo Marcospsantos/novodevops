@@ -41,9 +41,9 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
-           # username : ${{secrets.DOCKERHUB_USER}}
-           # password : ${{secrets.DOCKERHUB_PWD}}
-sudo docker login --username ${{secrets.DOCKERHUB_USER}} --password ${{secrets.DOCKERHUB_PWD}}
+            username : ${{secrets.DOCKERHUB_USER}}
+            password : ${{secrets.DOCKERHUB_PWD}}
+              
 
       - name: Expose Docker container
         run: docker run -it -d -p 8000:80 imagem-nova:latest

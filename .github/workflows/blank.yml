@@ -45,13 +45,15 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Expose Docker container
+                  
+         run:|
+              
+              git push 
+        
+
         run: docker run -it -d -p 8000:80 imagem-nova:latest
         
-      - name: enviar alterações |
-            git push |
-           curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | \
-            sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && \
-            echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | \
+           
             
       - name: Install agent
         run: |

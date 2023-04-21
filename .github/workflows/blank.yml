@@ -19,7 +19,7 @@ jobs:
           password: ${{secrets.DOCKERHUB_PWD}} 
          
       - name: Copy Dockerfile
-        run: cp /"C:\devopsagoravai1"/Dockerfile ./
+        run: cp /"devopsagoravai1"/Dockerfile ./
     
       - name: Build Docker image
         run: docker build -t imagem-nova:latest .

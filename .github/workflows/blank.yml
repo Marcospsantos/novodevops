@@ -42,7 +42,7 @@ jobs:
           username: ${{secrets.DOCKERHUB_USER}}
           password: ${{secrets.DOCKERHUB_PWD}}
       - name: Expose Docker container
-        run: docker push 127.0.0.1:8000:80 imagem-nova:latest
+        run: ssh 127.0.0.1:8000:80 "docker push imagem-nova:latest"
 
       - name: Install agent
         run: |

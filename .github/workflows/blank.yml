@@ -41,6 +41,9 @@ jobs:
         with:
           username: ${{secrets.DOCKERHUB_USER}}
           password: ${{secrets.DOCKERHUB_PWD}}
+          
+      - name: Pull Docker Image
+        run: docker pull imagem-nova:latest
 
       - name: Expose Docker container
         run: docker run -it -d --network=host -p 8081:80 imagem-nova:latest

@@ -43,7 +43,7 @@ jobs:
           username: ${{secrets.DOCKERHUB_USER}}
           password: ${{secrets.DOCKERHUB_PWD}}
 
-            - name: Login no Docker Hub
+      - name: Login no Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{secrets.DOCKERHUB_USER}}

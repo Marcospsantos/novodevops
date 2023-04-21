@@ -27,37 +27,29 @@ jobs:
         with:
           username: ${{secrets.DOCKERHUB_USER}}
           password: ${{secrets.DOCKERHUB_PWD}}
-          # config: python.lang.security.yaml
+          #config: python.lang.security.yaml
 
   deploy:
     runs-on: ubuntu-latest
-    # needs: test-job
+    #needs: test-job
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{secrets.DOCKERHUB_USER}}
           password: ${{secrets.DOCKERHUB_PWD}}
-
       - name: Expose Docker container
         run: docker run -it -d -p 8081:80 imagem-nova:latest
-
       - name: Install agent
         run: |
-          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | \
-            sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && \
-            echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | \
-            sudo tee /etc/apt/sources.list.d/ngrok.list && \
-            sudo apt update && sudo apt install ngrok
-
+          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && \
+          echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && \
+          sudo apt update && sudo apt install ngrok
       - name: Connect agent for token
         run: ngrok config add-authtoken 2OZpuCgnZ2xsbCq8wAEpgJJwGMN_6qcq2HVjLc4YeqcuV2tGT
-
       - name: Init Ngrok
         run: ngrok http 8081
-
       - name: Deploy
         run: echo "Deploy ok"
